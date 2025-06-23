@@ -76,10 +76,17 @@ main:
 # a1 is the address of the "output" array (defined above).
 # Think: why might having a1 be useful?
 f:
-    # YOUR CODE GOES HERE!
+  
+    # a0 = input value (from -3 to 3)
+    # a1 = base address of array "output"
+    
+    addi t0, a0, 3         # t0 = index = a0 + 3
+    slli t0, t0, 2         # multiply index by 4 to get byte offset (word is 4 bytes)
+    add t0, t0, a1         # t0 = address of output[index]
+    lw a0, 0(t0)           # load word from output[index] into a0
+    jr ra                  # return with result in a0
 
-    jr ra               # Always remember to jr ra after your function!
-
+  
 print_int:
     mv a1, a0
     li a0, 1
